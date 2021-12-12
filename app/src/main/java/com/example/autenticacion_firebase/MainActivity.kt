@@ -12,26 +12,26 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
-
+    // Variable de tipo FirebaseAuth
     private lateinit var auth: FirebaseAuth
 
+    //Creamos variables para enlazar con el layout
     lateinit var email: EditText
     lateinit var contraseña: EditText
     lateinit var iniciarSesion: Button
     lateinit var registro: Button
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+// Enlazamos las variables al layout
         email = findViewById(R.id.email)
         contraseña = findViewById(R.id.contraseña)
         iniciarSesion = findViewById(R.id.iniciarSesion)
         registro = findViewById(R.id.registro)
 
         auth = Firebase.auth
-
+//Eventos en los botones iniciar sesion y registro
         registro.setOnClickListener {
             crearcuenta(email.text.toString(), contraseña.text.toString())
         }
@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //Método que crea una cuenta recibiendo un email y una contraseña
     private fun crearcuenta(email: String, password: String) {
 
         auth.createUserWithEmailAndPassword(email, password)
@@ -64,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("estado", "" + auth.currentUser?.uid)
     }
 
+    //Método que inicia sesion recibiendo un email y una contraseña
     private fun iniciarsesion(email: String, password: String) {
 
         auth.signInWithEmailAndPassword(email, password)
